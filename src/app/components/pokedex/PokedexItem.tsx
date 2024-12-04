@@ -1,15 +1,29 @@
+"use client";
 import fetchPokemon from "@/actions/fetchPokemon";
 import { Badge } from "@/components/ui/badge";
 import { getTypeColor, toTitleCase } from "@/lib/utils";
-import { PokemonDetails } from "@/types/Pokemon";
 import Image from "next/image";
+import useSWR from "swr";
 
 interface PokedexItemProps {
   name: string;
 }
 
-const PokedexItem = async ({ name }: PokedexItemProps) => {
-  const pokemon: PokemonDetails = await fetchPokemon(name);
+const PokedexItem = ({ name }: PokedexItemProps) => {
+  // const pokemon: PokemonDetails = await fetchPokemon(name);
+  const {
+    data: pokemon,
+    isLoading,
+    error,
+  } = useSWR(["api/pokemon", name], async () => fetchPokemon(name));
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!pokemon) {
+    return <div>Pokemon not found</div>;
+  }
 
   return (
     <div className="bg-slate-900 flex-1  rounded-lg p-2 items-center flex flex-col">
@@ -19,7 +33,6 @@ const PokedexItem = async ({ name }: PokedexItemProps) => {
         alt={pokemon.name}
         width={140}
         height={140}
-        objectFit="cover"
       />
       <div className="flex gap-2">
         {pokemon.types.map(({ type }) => (

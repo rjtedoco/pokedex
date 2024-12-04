@@ -1,5 +1,5 @@
+import FilteredPokedexList from "../components/FilteredPokedexList";
 import PaginationList from "../components/PaginationList";
-import PokedexList from "../components/pokedex/PokedexList";
 import Search from "../components/Search";
 
 const Pokedex = async (props: {
@@ -17,7 +17,7 @@ const Pokedex = async (props: {
     <div className="flex flex-col m-4 gap-4 items-center">
       <h1>Pokedex</h1>
       <Search placeholder="Search here..." />
-      <PokedexList query={query} currentPage={currentPage} />
+      <FilteredPokedexList query={query} currentPage={currentPage} />
       <PaginationList totalPages={totalPages} />
     </div>
   );

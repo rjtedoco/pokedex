@@ -23,7 +23,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 right-0 shadow-md bg-yellow-200 min-h-8 p-4">
+    <nav className="sticky top-0 z-10 right-0 shadow-md bg-yellow-200 min-h-8 p-4">
       <div className="flex justify-between">
         <div>Pokemon</div>
         <Collapsible

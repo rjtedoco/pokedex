@@ -1,5 +1,6 @@
 "use client";
 
+import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
@@ -21,19 +22,18 @@ export default function Search({ placeholder }: { placeholder: string }) {
   }, 300);
 
   return (
-    <div className="relative flex w-full  sm:max-w-[500px]">
+    <div className="relative flex items-center w-full flex-shrink-0 md:max-w-[500px]">
       <label htmlFor="search" className="sr-only">
         Search
       </label>
-      <input
-        className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-        placeholder={placeholder}
-        onChange={(e) => {
-          handleSearch(e.target.value);
-        }}
+      <SearchIcon className="absolute ml-3 pointer-events-none h-4 w-4 text-gray-500 peer-focus:text-gray-900" />
+      <Input
+        type="text"
+        placeholder="Search a pokemon name..."
+        onChange={(e) => handleSearch(e.target.value)}
         defaultValue={searchParams.get("search") || ""}
+        className="pl-8"
       />
-      <SearchIcon className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
     </div>
   );
 }
