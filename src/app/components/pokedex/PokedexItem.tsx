@@ -1,4 +1,4 @@
-import getPokemon from "@/actions/getPokemon";
+import fetchPokemon from "@/actions/fetchPokemon";
 import { Badge } from "@/components/ui/badge";
 import { getTypeColor, toTitleCase } from "@/lib/utils";
 import { PokemonDetails } from "@/types/Pokemon";
@@ -9,16 +9,17 @@ interface PokedexItemProps {
 }
 
 const PokedexItem = async ({ name }: PokedexItemProps) => {
-  const pokemon: PokemonDetails = await getPokemon(name);
+  const pokemon: PokemonDetails = await fetchPokemon(name);
 
   return (
-    <div className="bg-slate-900">
+    <div className="bg-slate-900 flex-1  rounded-lg p-2 items-center flex flex-col">
       <h2 className="text-white">{toTitleCase(pokemon.name)}</h2>
       <Image
         src={pokemon.imageUrl}
         alt={pokemon.name}
-        width={150}
-        height={150}
+        width={140}
+        height={140}
+        objectFit="cover"
       />
       <div className="flex gap-2">
         {pokemon.types.map(({ type }) => (

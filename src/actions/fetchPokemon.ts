@@ -1,6 +1,6 @@
 import { PokemonDetails } from "@/types/Pokemon";
 
-const getPokemon = async (name: string): Promise<PokemonDetails> => {
+const fetchPokemon = async (name: string): Promise<PokemonDetails> => {
   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
   const data = await response.json();
 
@@ -11,4 +11,4 @@ const getPokemon = async (name: string): Promise<PokemonDetails> => {
   };
 };
 
-export default getPokemon;
+export default fetchPokemon;

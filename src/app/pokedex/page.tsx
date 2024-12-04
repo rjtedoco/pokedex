@@ -1,11 +1,24 @@
-"use client";
+import PaginationList from "../components/PaginationList";
 import PokedexList from "../components/pokedex/PokedexList";
+import Search from "../components/Search";
 
-const Pokedex = async () => {
+const Pokedex = async (props: {
+  searchParams?: Promise<{
+    query?: string;
+    page?: string;
+  }>;
+}) => {
+  const searchParams = await props.searchParams;
+  const query = searchParams?.query || "";
+  const currentPage = Number(searchParams?.page) || 1;
+  const totalPages = Math.ceil(currentPage / 5) * 5;
+
   return (
-    <div>
+    <div className="flex flex-col m-4 gap-4 items-center">
       <h1>Pokedex</h1>
-      <PokedexList />
+      <Search placeholder="Search here..." />
+      <PokedexList query={query} currentPage={currentPage} />
+      <PaginationList totalPages={totalPages} />
     </div>
   );
 };
