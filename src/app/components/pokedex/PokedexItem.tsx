@@ -31,8 +31,8 @@ const PokedexItem = ({ name }: PokedexItemProps) => {
       <Image
         src={pokemon.imageUrl}
         alt={pokemon.name}
-        width={140}
-        height={140}
+        width={112}
+        height={112}
       />
       <div className="flex gap-2">
         {pokemon.types.map(({ type }) => (

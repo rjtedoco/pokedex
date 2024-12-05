@@ -5,13 +5,18 @@ import { SearchIcon } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 
-export default function Search({ placeholder }: { placeholder: string }) {
+interface SearchProps {
+  onSearch: () => void;
+}
+
+export default function Search({ onSearch }: SearchProps) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
   const handleSearch = useDebouncedCallback((term: string) => {
     const params = new URLSearchParams(searchParams);
+    params.set("page", "1");
     if (term) {
       params.set("query", term);
     } else {
@@ -19,6 +24,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
     }
 
     replace(`${pathname}?${params.toString()}`);
+    onSearch();
   }, 300);
 
   return (
@@ -29,7 +35,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
       <SearchIcon className="absolute ml-3 pointer-events-none h-4 w-4 text-gray-500 peer-focus:text-gray-900" />
       <Input
         type="text"
-        placeholder="Search a pokemon name..."
+        placeholder="Search a specific pokemon by name here..."
         onChange={(e) => handleSearch(e.target.value)}
         defaultValue={searchParams.get("search") || ""}
         className="pl-8"

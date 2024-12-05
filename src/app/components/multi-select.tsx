@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { X } from "lucide-react";
+import { FilterIcon, X } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import {
@@ -65,10 +65,11 @@ export default function MultiSelect({
   return (
     <Command
       onKeyDown={handleKeyDown}
-      className="overflow-visible bg-transparent"
+      className="overflow-visible bg-transparent w-full md:w-[500px]"
     >
+      <FilterIcon className="absolute mt-3 ml-3 h-4 w-4 text-gray-500 peer-focus:text-gray-900" />
       <div className="group rounded-md border border-input px-3 py-2 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
-        <div className="flex flex-wrap gap-1">
+        <div className="flex flex-wrap gap-1 ml-5 ">
           {selectedTypes.map((type) => (
             <Badge key={type.value} variant="secondary">
               {type.label}
@@ -89,14 +90,15 @@ export default function MultiSelect({
               </button>
             </Badge>
           ))}
+
           <CommandPrimitive.Input
             ref={inputRef}
             value={inputValue}
             onValueChange={setInputValue}
             onBlur={() => setOpen(false)}
             onFocus={() => setOpen(true)}
-            placeholder="Select types..."
-            className="ml-2 flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
+            placeholder="Filter pokemon types here..."
+            className="flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
           />
         </div>
       </div>

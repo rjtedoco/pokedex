@@ -15,8 +15,6 @@ const PokedexList = ({ query, currentPage, types }: PokedexListProps) => {
     () => fetchPokemons({ query, currentPage, types })
   );
 
-  console.log("data =>", data);
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
