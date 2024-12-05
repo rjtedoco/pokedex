@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import MultiSelect from "./multi-select";
-import PokedexList from "./pokedex/PokedexList";
+import MultiSelect from "../ui/multi-select";
+import PokedexList from "./PokedexList";
 import Search from "./Search";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 

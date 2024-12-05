@@ -1,5 +1,5 @@
-import FilteredPokedexList from "../components/FilteredPokedexList";
-import PaginationList from "../components/PaginationList";
+import FilteredPokedexList from "../../components/pokedex/FilteredPokedexList";
+import PaginationList from "../../components/pokedex/PaginationList";
 
 const Pokedex = async (props: {
   searchParams?: Promise<{
